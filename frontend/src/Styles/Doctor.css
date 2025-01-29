@@ -1,0 +1,91 @@
+.doctor_container{
+    display: flex;
+    height: 100vh;
+}
+  
+  .doctor_sidebar {
+    width: 300px;
+    background-color: #212121;
+    padding: 20px;
+    position: relative;
+  }
+
+  .doctor_sidebar .doctor_profile{
+    height: auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .doctor_sidebar .doctor_profile .user_info{
+    height: auto;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+  }
+
+  .doctor_sidebar .logout_btn{
+    position: relative;
+    bottom: 15px;
+    /* left: 15px; */
+    width: 100%;
+    text-transform: uppercase;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: rgba(255,255,255,0.045);
+  }
+
+  .doctor_sidebar .doctor_profile .user_icon{
+    background-color: rgba(255,255,255,0.045);
+    font-size: 30px;
+    padding: 10px 15px;
+    border-radius: 50%;
+    color: #f8f8f8;
+  }
+  .doctor_sidebar .doctor_profile .user .email{
+    color: teal;
+    font-weight: 500;
+    font-size: 14px;
+  }
+  .doctor_sidebar .doctor_profile .user .name{
+    color: #f8f8f8;
+    font-size: 18px;
+  }
+
+
+  .doctor_sidebar  .line{
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255,255,255,0.045);
+    margin: 20px 0px;
+  }
+  
+  .doctor_sidebar .menu_list a{
+         list-style: none;
+         padding: 8px 10px;
+         margin: 5px 0px;
+         border-radius: 3px;
+         color: #f8f8f8;
+         display: flex;
+         align-items: center;
+         gap: 6px;
+         transition: 0.5s ease;
+  }
+
+  .doctor_sidebar .menu_list a:hover{
+    background-color: rgba(255,255,255,0.045);
+
+  }
+
+
+ 
+  .doctorContent {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  

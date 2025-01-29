@@ -1,0 +1,9 @@
+.not_found{
+    width: 100vw;
+    height: 100vh;
+}
+
+.not_found .img{
+    height: 100%;
+    width: 100%;
+}

@@ -1,0 +1,53 @@
+{/* patient routes */}
+          {role === "patient" && isLoggedIn === "true" ? (
+            <Route element={<ProtectedRoute />}>
+              {/* Patient-specific routes */}
+              <Route path="/patient" element={<Patient />} />
+              <Route path="/home" element={<PatientHome />} />
+              <Route path="/allDoctors" element={<All_Doctors />} />
+              <Route path="/myBookings" element={<My_Bookings />} />
+              <Route
+                path="/scheduledSessions"
+                element={<Scheduled_Session />}
+              />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+          ) : (
+            // If not logged in or role is not patient, redirect to login
+            <Route path="/patient" element={<Login />} />
+            
+          )}
+
+          {/* doctor routes */}
+          {role === "doctor" && isLoggedIn === "true" ? (
+            <Route element={<ProtectedRoute />}>
+              {/* Patient-specific routes */}
+              <Route path="/doctor" element={<Doctor />} />
+              <Route path="/doctorDashboard" element={<DoctorDashboard />} />
+              <Route path="/myAppointments" element={<My_Appointment />} />
+              <Route path="/mySessions" element={<My_Sessions />} />
+              <Route path="/myPatients" element={<My_Patients />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
+          ) : (
+            // If not logged in or role is not patient, redirect to login
+            <Route path="/doctor" element={<Login />} />
+            
+          )}
+
+          {/* admin routes */}
+          {role === "admin" && isLoggedIn === "true" ? (
+            <Route element={<ProtectedRoute />}>
+              {/* Patient-specific routes */}
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/adminDashboard" element={<AdminDashboard />} />
+              <Route path="/appointment" element={<Appointment />} />
+              <Route path="/doctors" element={<Doctors />} />
+              <Route path="/patients" element={<Patients />} />
+              <Route path="/schedule" element={<Schedule />} />
+            </Route>
+          ) : (
+            // If not logged in or role is not patient, redirect to login
+            <Route path="/admin" element={<Login />} />
+            
+          )}

@@ -1,0 +1,102 @@
+/* Admin Doctors Page */
+.admin_doctors {
+  position: relative;
+  padding: 20px;
+}
+
+/* Modal (Popup) Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Blur Effect on Background */
+.blur {
+  filter: blur(5px);
+}
+
+/* Button for Add Doctor */
+button {
+  background-color: #3a8dff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #3077d9;
+}
+/* Container for the filters and buttons */
+.doctors_filters {
+  display: flex;
+  gap: 20px;
+  align-items: center; /* Vertically align the items */
+  margin-bottom: 20px;
+}
+
+/* Style for the individual filter items */
+.filter {
+  display: flex;
+  flex-direction: column;
+}
+
+.filter label {
+  margin-bottom: 5px;
+}
+
+.filter input {
+  padding: 5px;
+  width: 200px;
+}
+
+/* Button styles */
+button {
+  padding: 5px 10px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Reset filter button style */
+.reset-filters-button {
+  background-color: #ff6347;
+  margin-left: 20px; /* Space between buttons */
+}
+
+.reset-filters-button:hover {
+  background-color: #ff4500;
+}
+
+/* Add Doctor button style */
+.add-doctor-button {
+  background-color: #007bff;
+  margin-left: 20px; /* Space between buttons */
+}
+
+.add-doctor-button:hover {
+  background-color: #0056b3;
+}

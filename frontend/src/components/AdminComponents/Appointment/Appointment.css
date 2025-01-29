@@ -1,0 +1,35 @@
+.appointments_filters {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    gap: 20px;
+    margin-bottom: 20px; 
+  }
+  
+  .appointments_filters > div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .appointments_filters label {
+    margin-bottom: 5px; 
+  }
+  
+  .appointments_filters input {
+    padding: 5px;
+    width: 200px; 
+  }
+  
+  .reset-filters-button {
+    margin-left: 20px;
+    padding: 5px 10px;
+    background-color: #ffb3a5;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .reset-filters-button:hover {
+    background-color: #ff4500;
+  }
+  

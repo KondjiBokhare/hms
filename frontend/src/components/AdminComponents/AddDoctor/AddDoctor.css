@@ -1,0 +1,92 @@
+/* Main Container */
+/* .add_doctor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f9;
+  }
+  
+  h1 {
+    text-align: center;
+    color: #4c4c4c;
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+   */
+/* .doctor_form {
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+  }
+   */
+.close_popup {
+  display: flex;
+  justify-content: end;
+  font-size: 20px;
+}
+.input_field {
+  margin-bottom: 15px;
+}
+
+.input_field label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input_field input,
+.input_field select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input_field input:focus,
+.input_field select:focus {
+  border-color: #3a8dff;
+}
+
+.input_field select {
+  padding: 10px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #3a8dff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #3077d9;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .add_doctor {
+    padding: 20px;
+  }
+
+  .doctor_form {
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+  }
+}

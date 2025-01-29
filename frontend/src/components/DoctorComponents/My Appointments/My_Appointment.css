@@ -1,0 +1,38 @@
+.filters {
+  display: flex;
+  align-items: center; 
+  justify-content: flex-start; 
+  gap: 20px;
+  margin: 20px; 
+}
+
+/* .filters > div {
+  display: flex;
+ flex-direction: column; 
+} */
+.filters .date_filter,.name_filter{
+  display: flex;
+}
+.filters label {
+  margin-bottom: 5px; 
+  font-weight: 500;
+}
+
+.filters input {
+  padding: 5px;
+  width: 200px; 
+}
+
+.reset-filters-button {
+  width: 250px;
+  margin-left: 20px;
+  padding: 5px 10px;
+  background-color: #ffb3a5;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.reset-filters-button:hover {
+  background-color: #ff4500;
+}

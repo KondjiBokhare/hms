@@ -1,0 +1,148 @@
+.registration_session {
+    width: 100%;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.registration_session .form_content {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+    display: flex;
+}
+
+.form_content .left_image {
+    width: 60%;
+    height: 100vh;
+    position: relative;
+}
+
+.form_content .left_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.registration_form {
+    height: auto;
+    width: 40%;
+    background: #4BAFA3;
+    backdrop-filter: blur(7px);
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.registration_form .message {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    padding: 4px 10px;
+    text-transform: capitalize;
+    border-radius: 3px;
+    font-size: 16px;
+    color: crimson;
+}
+
+.registration_form .reg_heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+.registration_form .reg_heading h2 {
+    color: #fff;
+}
+
+.registration_form .reg_heading p {
+    color: #c4c4c4;
+}
+
+.registration_form .form_group {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+
+}
+
+.form_group .input_box {
+    width: 100%;
+    margin: 10px 0px;
+    position: relative;
+}
+
+.form_group .input_box select {
+    width: 100%;
+    height: 40px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.363);
+    padding-left: 15px;
+    border-radius: 4px;
+    color: #333;
+}
+
+.label {
+    color: #e7e7e7;
+    margin-bottom: 4px;
+}
+
+.form_group .input_box input {
+    width: 100%;
+    height: 40px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.363);
+    padding-left: 15px;
+    border-radius: 4px;
+    color: #333;
+}
+
+.form_group .input_box input::placeholder {
+    color: #333;
+}
+
+.form_group .sm {
+    width: 70px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.form_group .input_box .radio {
+    width: 15px;
+    height: 15px;
+}
+
+.form_group .reg_btn {
+    width: 100%;
+    background-color: crimson;
+    margin-top: 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.login_page {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.login_page p {
+    color: #e4e4e4;
+}
+
+.login_page p a {
+    color: crimson;
+    font-weight: 500;
+}

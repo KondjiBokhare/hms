@@ -1,0 +1,71 @@
+.login_session{
+    width: 100%;
+    height: 100vh;
+    /* background-color: rgb(210, 206, 206); */
+    background-image: url('https://healthcaredesignmagazine.com/wp-content/uploads/2022/07/craignew.jpg.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.login_session .login_form{
+    height: 60vh;
+    width: 40%;
+    /* background-color: whitesmoke; */
+    background: transparent;
+    backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    padding: 0 120px;
+    border: 1px solid grey ;
+    border-radius: 5px;
+}
+
+.login_form .log_heading, .reg_page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.login_form .reg_page{
+    margin-top: 20px;
+}
+
+.login_form .log_field{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.log_field .log_input{
+    display: flex;
+    position: relative;
+}
+
+.log_field .log_input input,button{
+    border: none;
+    border: 1px solid #555;
+    border-radius: 5px;
+    width: 100%;
+    padding: 5px ;   
+    overflow: hidden;
+}
+
+.log_input .log_btn{
+    margin-top: 20px;
+    border: none;
+    background-color: #0A76D8;
+    color: #fff;
+    cursor: pointer;
+}
+
+/* .log_input .log_btn:hover{
+    background-color: #0A76D8;
+    color: #fff;
+} */

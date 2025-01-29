@@ -1,0 +1,45 @@
+import React from 'react'
+import './Settings.css'
+import Header from '../../Header/Header'
+import { FaBriefcaseMedical } from "react-icons/fa";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaWheelchairMove } from "react-icons/fa6";
+
+const Settings = () => {
+  return (
+    <div className="patient_session">
+      <div className="patient_header">
+        <Header pagename="Settings" />
+      </div>
+
+      <div className="patientsetting_links">
+        <div className="Account_settings">
+          <div className="setting_icons"><FaBriefcaseMedical /></div>
+          <div className="view_account_links">
+            <h3>Account settings</h3>
+            <p>Edit your Account Details & Change Password</p>
+          </div>
+
+        </div>
+        <div className="viewaccount_details">
+          <div className="setting_icons"> <IoEyeSharp /></div>
+          <div className="view_account_links">
+            <h3>View Account Details</h3>
+            <p>View Personal Information About Your Account</p>
+          </div>
+
+        </div>
+        <div className="delete_account">
+          <div className="setting_icons"> <FaWheelchairMove /></div>
+          <div className="view_account_links">
+            <h3>Delete Account</h3>
+            <p>Will Permanently Remove your Account</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default Settings

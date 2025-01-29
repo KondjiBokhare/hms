@@ -1,0 +1,22 @@
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fcfcfc;
+    color: #1f1f1f;
+}
+
+.header .pagename{
+    font-size: 1.5rem;
+}   
+
+.header .date_data{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.date_data .date_icon{
+    font-size: 1.5rem;
+}

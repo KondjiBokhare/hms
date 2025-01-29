@@ -1,0 +1,130 @@
+.doctorhome_welcome {
+  margin-top: 10px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.doctor_welcome h3 {
+  color: #555;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.doctor_welcome h1 {
+  color: #555;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.doctor_welcome p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+ #doctorSearch {
+  width: 550px;
+  height: 2.75rem;
+  margin: 1rem;
+}
+
+.doctorhome_content {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+.status {
+  width: 48%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.status_sections {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.status h2 {
+  color: #222522;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+.All_Doctors,
+.all_doctors,
+.new_bookings,
+.total_sessions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  height: auto;
+  width: 48%;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid rgb(163, 157, 157);
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.data {
+  flex: 1;
+  font-size: 16px;
+  color: #555;
+  display: flex;
+  flex-direction: column;
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(73, 70, 70);
+  border-radius: 50%;
+  margin-left: 10px;
+  color: #bfd3fa;
+}
+
+/* Upcoming bookings section * */
+.upcoming_bookings {
+  width: 48%;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.upcoming_bookings h3 {
+  color: #090909;
+  font-size: 22px;
+  margin-bottom: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  font-size: 14px;
+  color: #555;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  color: #333;
+}
+
+tr:hover {
+  background-color: #f9f9f9;
+}

@@ -1,0 +1,46 @@
+/* Container for the filters and buttons */
+.patients_filters {
+    display: flex;
+    gap: 20px;
+    align-items: center; /* Vertically align the items */
+    margin-bottom: 20px;
+  }
+  
+  /* Style for the individual filter items */
+  .filter {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .filter label {
+    margin-bottom: 5px;
+  }
+  
+  .filter input {
+    padding: 5px;
+    width: 200px;
+  }
+  
+  /* Button styles */
+  button {
+    padding: 5px 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  /* Reset filter button style */
+  .reset-filters-button {
+    background-color: #ff6347;
+    margin-left: 20px; /* Space between buttons */
+  }
+  
+  .reset-filters-button:hover {
+    background-color: #ff4500;
+  }
+  

@@ -1,0 +1,26 @@
+/* doctors setting css */
+.Account_settings , .viewaccount_details, .delete_account{
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid rgb(163, 157, 157);
+    border-radius: 5px;    
+    display: flex;
+    gap: 2rem;
+}
+
+.setting_icons{
+    color: #3875BA;
+    font-size: 1.05rem;
+    height: 3rem;
+    width: 3rem;
+    display: flex;align-items: center;
+    justify-content: center;
+    background-color: #EDEDED;
+    border: 1px solid black;
+    border-radius: 5px;
+}
