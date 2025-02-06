@@ -21,16 +21,24 @@ const AddDoctor = ({onClose}) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     const phonePattern = /^[0-9]{10}$/;
     if (!phonePattern.test(contact)) {
       alert("Please enter a valid 10-digit phone number.");
+      return;
     }
+  
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
+      return;
     }
-
+  
+    if (!name || !contact || !email || !specialization || !experience || !password) {
+      alert("All fields are required!");
+      return;
+    }
+  
     const doctorData = {
       name,
       contact,
@@ -39,26 +47,26 @@ const AddDoctor = ({onClose}) => {
       experience,
       password
     };
-    console.log(doctorData);
+  
     try {
-        const response = await axios.post('http://localhost:8585/api/doctor',doctorData)
-        console.log(response.data)
-        console.log(response.status)
-        if(response.status === 201){
-          alert("Doctor Added Successfully")
-          // onClose()
-        }
+      const response = await axios.post('http://localhost:8585/api/doctor', doctorData);
+      if (response.status === 201) {
+        alert("Doctor Added Successfully");
+        onClose(); // Close the popup after success
+      }
     } catch (error) {
-        console.log(error)
+      console.log(error);
     }
-
-    setName('')
-    setContact('')
-    setEmail('')
-    setExperience('')
-    setSpecialization()
-    setPassword('')
+  
+    // Clear form fields
+    setName('');
+    setContact('');
+    setEmail('');
+    setExperience('');
+    setSpecialization('');
+    setPassword('');
   };
+  
   return (
     <div className="add_doctor" ref={popRef} onClick={closePopup}>
       <div className="close_popup"><IoCloseCircleOutline onClick={onClose}/></div>

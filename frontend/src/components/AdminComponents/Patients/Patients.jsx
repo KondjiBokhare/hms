@@ -147,7 +147,7 @@ const Patients = () => {
               <th>Name</th>
               <th>Contact</th>
               <th>Email</th>
-              <th>Gender</th>
+              <th>Age</th>
               <th>Date of Birth</th>
               <th>Address</th>
               <th>Handle Patient</th>
@@ -159,7 +159,7 @@ const Patients = () => {
                 <td>{patient.fname} {patient.lname}</td>
                 <td>{patient.contact}</td>
                 <td>{patient.email}</td>
-                <td>{patient.gender}</td>
+                <td>{patient.age}</td>
                 <td>{new Date(patient.dob).toLocaleDateString()}</td>
                 <td>{patient.address}</td>
                 <td>
