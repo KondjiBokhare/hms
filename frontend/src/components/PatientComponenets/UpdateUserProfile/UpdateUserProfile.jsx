@@ -1,84 +1,3 @@
-<<<<<<< HEAD
-
-import React, { useEffect, useState } from 'react';
-
-const UpdateUserProfile = () => {
-  const [userData, setUserData] = useState({ username: '', email: '' });
-  const [currentPassword, setCurrentPassword] = useState('');
-  const [newPassword, setNewPassword] = useState('');
-  const [errorMessages, setErrorMessages] = useState('');
-
-  useEffect(() => {
-    // Simulating fetching data from the server (Replace with your backend API call)
-    const fetchedUserData = {
-      username: 'john_doe',
-      email: 'john.doe@example.com'
-    };
-    setUserData(fetchedUserData);
-  }, []);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setErrorMessages('');  // Clear previous errors
-
-    // Simple validation
-    if (!currentPassword || !newPassword) {
-      setErrorMessages('Please fill out all fields.');
-      return;
-    }
-
-    if (newPassword.length < 6) {
-      setErrorMessages('New password must be at least 6 characters.');
-      return;
-    }
-
-    // Send data to the backend (Replace with your real backend API)
-    // Example: Update user information via API call
-    fetch('/updateUserProfile', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        currentPassword: currentPassword,
-        newPassword: newPassword
-      })
-    })
-    .then(response => response.json())
-    .then(data => {
-      if (data.success) {
-        alert('Profile updated successfully!');
-      } else {
-        setErrorMessages(data.message || 'An error occurred.');
-      }
-    })
-    .catch(error => {
-      setErrorMessages('Error: ' + error.message);
-    });
-  };
-
-  return (
-    <div className="container">
-      <h1>User Profile</h1>
-      <form id="userProfileForm" onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" value={userData.username} disabled />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" name="email" value={userData.email} disabled />
-        </div>
-        <div>
-          <label htmlFor="currentPassword">Current Password:</label>
-          <input type="password" id="currentPassword" name="currentPassword" value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} />
-        </div>
-        <div>
-          <label htmlFor="newPassword">New Password:</label>
-          <input type="password" id="newPassword" name="newPassword" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} />
-        </div>
-        <button type="submit">Update Information</button>
-      </form>
-      <div id="errorMessages" className="error">{errorMessages}</div>
-=======
 import React, { useState, useEffect } from "react";
 import "./UpdateUserProfile.css";
 import { useNavigate } from "react-router-dom";
@@ -259,48 +178,58 @@ const UpdateUserProfile = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 className="input_field"
               />
-              <input
+              {/* <input
                 type="date"
                 value={dob}  // Make DOB field editable and show date
                 onChange={(e) => setDob(e.target.value)}
                 className="input_field"
-              />
+              /> */}
+              <input
+            type="text"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}  // User can edit date in dd-mm-yyyy format
+            onBlur={(e) => setDob(formatDateToDDMMYYYY(e.target.value))}  // Format when losing focus
+            className="input_field"
+            placeholder="DD-MM-YYYY"
+          />
             </div>
 
             <div className="form_group">
-              <input
+
+              <div className="pass_field">
+                <input
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter Current Password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 className="input_field"
               />
-              <div className="password-visibility-toggle" onClick={() => setPasswordVisible(!passwordVisible)} >
-                {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-              </div>
-              
-              <input
+                <div className="password-visibility-toggle eye" onClick={() => setPasswordVisible(!passwordVisible)} >
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div></div>
+              <div className="pass_field"> <input
                 type={newPasswordVisible ? "text" : "password"}
                 placeholder="Enter New Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input_field"
               />
-              <div className="password-visibility-toggle" onClick={() => setNewPasswordVisible(!newPasswordVisible)}>
-                {newPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                <div className="password-visibility-toggle eye" onClick={() => setNewPasswordVisible(!newPasswordVisible)}>
+                  {newPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
-
-              <input
-                type={confirmPasswordVisible ? "text" : "password"}
-                placeholder="Confirm New Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="input_field"
-              />
-              <div className="password-visibility-toggle" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
-                {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+              <div className="pass_field">
+                <input
+                  type={confirmPasswordVisible ? "text" : "password"}
+                  placeholder="Confirm New Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="input_field"
+                />
+                <div className="password-visibility-toggle eye" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
+                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
-
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
@@ -322,13 +251,8 @@ const UpdateUserProfile = () => {
           </form>
         )}
       </div>
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
     </div>
   );
 };
 
-<<<<<<< HEAD
 export default UpdateUserProfile;
-=======
-export default UpdateUserProfile;
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290

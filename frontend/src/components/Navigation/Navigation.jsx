@@ -2,12 +2,14 @@ import React from "react";
 import './Navigation.css';
 import { Link } from "react-router-dom";
 import { FaHospitalSymbol } from "react-icons/fa";
+import { FaHospitalSymbol } from "react-icons/fa";
+
 
 const Navigation = () => {
   return (
     <div className="navigation_section">
-      <Link to="/" className="logo">
-      <div className="icon"><FaHospitalSymbol /></div>
+      <Link to="/" className="logo">       
+        <div className="icon"><FaHospitalSymbol /></div>
         <div className="hospital_name">MIT Hospital</div>
       </Link>
       <div className="nav_links">
