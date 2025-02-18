@@ -1,14 +1,14 @@
 import React from "react";
 import './Navigation.css';
 import { Link } from "react-router-dom";
-import { BsArrowThroughHeartFill } from "react-icons/bs";
-
+import { FaHospitalSymbol } from "react-icons/fa";
 
 const Navigation = () => {
   return (
     <div className="navigation_section">
       <Link to="/" className="logo">
-        <div className="hospital_name"><span><BsArrowThroughHeartFill /></span> Hospital Name</div>
+      <div className="icon"><FaHospitalSymbol /></div>
+        <div className="hospital_name">MIT Hospital</div>
       </Link>
       <div className="nav_links">
         <Link to="/registration" className="reg">

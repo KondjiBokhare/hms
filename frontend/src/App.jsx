@@ -28,6 +28,8 @@ import Appointment from "./components/AdminComponents/Appointment/Appointment";
 import Doctors from "./components/AdminComponents/Doctors/Doctors";
 import Patients from "./components/AdminComponents/Patients/Patients";
 import Schedule from "./components/AdminComponents/Schedule/Schedule";
+import UpdateUserProfile from "./components/PatientComponenets/UpdateUserProfile/UpdateUserProfile";
+
 
 const Home = lazy(() => import("./pages/Home/Home"));
 
@@ -66,6 +68,7 @@ const App = () => {
             <Route path="myBookings" element={<My_Bookings />} />
             <Route path="scheduledSessions" element={<Scheduled_Session />} />
             <Route path="settings" element={<Settings />} />
+            
           </Route>
 
           {/* Doctor Routes */}
@@ -87,6 +90,8 @@ const App = () => {
 
           {/* Common Components */}
           <Route path="/*" element={<Not_found />} />
+          <Route path="/updateUserProfile" element={<UpdateUserProfile />} />
+          
         </Routes>
       </Suspense>
   );
