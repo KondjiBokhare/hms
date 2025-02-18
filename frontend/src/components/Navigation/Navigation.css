@@ -7,7 +7,7 @@
     backdrop-filter: blur(10px);
     display: flex;
     align-items: center;
-    padding: 0px 3%;
+    padding: 0px 2%;
     justify-content: space-between;
 }
 
@@ -15,6 +15,15 @@
     font-size: 35px;
     font-weight: 700;
     color: #fff;
+    display: flex;
+    align-items: center;
+    gap:10px
+}
+
+.navigation_section .logo .icon{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .navigation_section .nav_links{
