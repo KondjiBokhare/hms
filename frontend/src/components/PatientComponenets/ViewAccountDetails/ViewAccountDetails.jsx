@@ -4,6 +4,7 @@ import './ViewAccountDetails.css'
 const ViewAccountDetails = () => {
   return (
     <div>ViewAccountDetails</div>
+    
   )
 }
 

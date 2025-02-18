@@ -3,9 +3,8 @@ import axios from "axios";
 import { IoCloseCircleOutline } from "react-icons/io5";
 import './AddDoctor.css'
 
-const AddDoctor = ({onClose}) => {
-
-  const popRef = useRef()
+const AddDoctor = ({ onClose, onAddDoctor }) => {
+  const popRef = useRef();
   const [name, setName] = useState("");
   const [contact, setContact] = useState("");
   const [email, setEmail] = useState("");
@@ -17,18 +16,28 @@ const AddDoctor = ({onClose}) => {
     if (popRef.current === e.target) {
       onClose();
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validation logic for phone, email, and password
     const phonePattern = /^[0-9]{10}$/;
     if (!phonePattern.test(contact)) {
       alert("Please enter a valid 10-digit phone number.");
+      return;
     }
+
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
+      return;
+    }
+
+    const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    if (!passwordPattern.test(password)) {
+      alert("Password must be at least 8 characters long, contain uppercase and lowercase letters, a number, and a special character.");
+      return;
     }
 
     const doctorData = {
@@ -37,31 +46,39 @@ const AddDoctor = ({onClose}) => {
       email,
       specialization,
       experience,
-      password
+      password,
     };
-    console.log(doctorData);
+
     try {
-        const response = await axios.post('http://localhost:8585/api/doctor',doctorData)
-        console.log(response.data)
-        console.log(response.status)
-        if(response.status === 201){
-          alert("Doctor Added Successfully")
-          // onClose()
-        }
+      const response = await axios.post("http://localhost:8585/api/doctor", doctorData);
+      if (response.status === 201) {
+        alert("Doctor Added Successfully");
+
+        // Call the onAddDoctor function to update the parent component's state
+        onAddDoctor(doctorData);
+
+        // Close the popup
+        onClose();
+      }
     } catch (error) {
-        console.log(error)
+      console.error(error);
+      alert("Failed to add doctor, please try again.");
     }
 
-    setName('')
-    setContact('')
-    setEmail('')
-    setExperience('')
-    setSpecialization()
-    setPassword('')
+    // Reset form
+    setName("");
+    setContact("");
+    setEmail("");
+    setExperience("");
+    setSpecialization("");
+    setPassword("");
   };
+
   return (
     <div className="add_doctor" ref={popRef} onClick={closePopup}>
-      <div className="close_popup"><IoCloseCircleOutline onClick={onClose}/></div>
+      <div className="close_popup">
+        <IoCloseCircleOutline onClick={onClose} />
+      </div>
       <form action="" method="post" onSubmit={handleSubmit} className="doctor_form">
         <div className="input_field">
           <label htmlFor="name">Name</label>
@@ -70,9 +87,7 @@ const AddDoctor = ({onClose}) => {
             value={name}
             id="name"
             placeholder="Name"
-            onChange={(e) => {
-              setName(e.target.value);
-            }}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="input_field">
@@ -96,11 +111,11 @@ const AddDoctor = ({onClose}) => {
             id="specialization"
             onChange={(e) => setSpecialization(e.target.value)}
           >
-            <option value="">select specialization</option>
+            <option value="">Select Specialization</option>
             <option value="General">General</option>
             <option value="Cardiologist">Cardiologist</option>
-            <option value="Nuerologist">Nuerologist</option>
-            <option value="Orthologist">Orthologist</option>
+            <option value="Neurologist">Neurologist</option>
+            <option value="Orthopedist">Orthopedist</option>
             <option value="Cosmetologist">Cosmetologist</option>
           </select>
         </div>

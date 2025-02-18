@@ -11,13 +11,14 @@ const Doctors = () => {
   const [nameFilter, setNameFilter] = useState("");
   const [specializationFilter, setSpecializationFilter] = useState("");
 
+  // Fetch all doctors when the component mounts
   useEffect(() => {
     const fetchAllDoctors = async () => {
       try {
         const response = await axios.get("http://localhost:8585/api/doctor");
         const data = response.data;
         setDoctorsList(data);
-        setFilteredDoctors(data);
+        setFilteredDoctors(data); // Initialize filtered list with all doctors
       } catch (error) {
         console.log(error);
       }
@@ -26,6 +27,7 @@ const Doctors = () => {
     fetchAllDoctors();
   }, []);
 
+  // Apply filters based on the inputs
   useEffect(() => {
     const applyFilters = () => {
       let filteredData = doctorsList;
@@ -44,27 +46,33 @@ const Doctors = () => {
         );
       }
 
-      setFilteredDoctors(filteredData);
+      setFilteredDoctors(filteredData); // Update the filtered list
     };
 
     applyFilters();
   }, [nameFilter, specializationFilter, doctorsList]);
 
+  // Delete doctor
   const deleteDoctor = async (id) => {
-    console.log(id);
-    console.log("doctor deleted");
     try {
       await axios.delete(`http://localhost:8585/api/doctor/${id}`);
-      setDoctorsList(doctorsList.filter((doctor) => doctor._id !== id));
+      setDoctorsList(doctorsList.filter((doctor) => doctor._id !== id)); // Update doctors list after delete
     } catch (error) {
       console.log(error);
     }
   };
 
+  // Reset filters
   const resetFilters = () => {
     setNameFilter("");
     setSpecializationFilter("");
     setFilteredDoctors(doctorsList); // Reset to show all doctors
+  };
+
+  // Function to handle the addition of a new doctor
+  const handleAddDoctor = (newDoctor) => {
+    setDoctorsList((prevDoctors) => [...prevDoctors, newDoctor]);
+    setFilteredDoctors((prevDoctors) => [...prevDoctors, newDoctor]); // Ensure the filter also includes the new doctor
   };
 
   return (
@@ -77,7 +85,7 @@ const Doctors = () => {
       {isOpen && (
         <div className="modal-overlay" onClick={() => setIsOpen(false)}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <AddDoctor onClose={() => setIsOpen(false)} />
+            <AddDoctor onClose={() => setIsOpen(false)} onAddDoctor={handleAddDoctor} />
           </div>
         </div>
       )}
@@ -136,10 +144,7 @@ const Doctors = () => {
                 <td>{doctor.specialization}</td>
                 <td>{doctor.experience} years</td>
                 <td>
-                  <button
-                    type="submit"
-                    onClick={() => deleteDoctor(doctor._id)}
-                  >
+                  <button type="submit" onClick={() => deleteDoctor(doctor._id)}>
                     Remove Doctor
                   </button>
                 </td>

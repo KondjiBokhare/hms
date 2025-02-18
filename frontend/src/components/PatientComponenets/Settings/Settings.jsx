@@ -17,6 +17,10 @@ const Settings = () => {
           <div className="setting_icons"><FaBriefcaseMedical /></div>
           <div className="view_account_links">
             <h3>Account settings</h3>
+            <div class="link">
+              <a href="/ViewAccountDetails">Edit Your Name And Password</a>
+ 
+</div>
             <p>Edit your Account Details & Change Password</p>
           </div>
 
@@ -25,6 +29,11 @@ const Settings = () => {
           <div className="setting_icons"> <IoEyeSharp /></div>
           <div className="view_account_links">
             <h3>View Account Details</h3>
+            <div class="link">
+              <a href="/ViewAccountDetails">View Account Details</a>
+ 
+</div>
+
             <p>View Personal Information About Your Account</p>
           </div>
 

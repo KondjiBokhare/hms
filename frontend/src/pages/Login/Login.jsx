@@ -48,6 +48,20 @@ const Login = () => {
       setPassword("");
     }
   };
+
+   //password visibility
+    const [passwordType, setPasswordType] = useState("password");
+    const [icon, setIcon] = useState("👁️");
+  
+    const toogleVisibility = () => {
+      if (passwordType == "password") {
+        setIcon("🙈");
+        setPasswordType("text");
+      } else {
+        setIcon("👁️");
+        setPasswordType("password");
+      }
+    };
   return (
     <div className="registration_session">
       <div className="form_content">
@@ -75,13 +89,12 @@ const Login = () => {
           <div className="form_group">
             <div className="input_box">
               <div className="label">Password</div>
-              <input
-                type="password"
-                value={password}
-                placeholder="Password "
-                id="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
+               <div className="passfield">
+                <input type={passwordType} name="password" value={password} placeholder="Password " id="passfield" onChange={(e) => setPassword(e.target.value)} />
+                <span className="eye" onClick={toogleVisibility}>
+                  {icon}
+                </span>
+              </div>
             </div>
           </div>
           <div className="form_group">

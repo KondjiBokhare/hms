@@ -25,14 +25,15 @@ const AdminDashboard = () => {
 
       const fetchAppointments = async () => {
         const response = await axios.get('http://localhost:8585/api/appointments', config);
-        console.log(response.data);
         setAllAppointments(response.data);
 
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);  // Set to midnight to compare only dates without time
+
         // Filter only upcoming appointments, including today's appointments
         const upcomingAppointments = response.data.filter((appointment) => {
-          const appointmentDate = new Date(appointment.scheduleDate);
-          let appointmentTime = appointment.scheduleTime;
+          const appointmentDate = new Date(appointment.date);
+          let appointmentTime = appointment.time;
 
           // Set the time for the appointment to correctly compare it with the current date and time
           if (appointmentTime) {
@@ -40,10 +41,11 @@ const AdminDashboard = () => {
             appointmentDate.setHours(timeParts[0], timeParts[1]);
           }
 
+          // Consider both today and future appointments
           return appointmentDate >= currentDate;
         });
 
-        setAppointments(upcomingAppointments); 
+        setAppointments(upcomingAppointments);
       };
 
       const fetchDoctors = async () => {
@@ -65,7 +67,7 @@ const AdminDashboard = () => {
   }, [admin.token]); // Re-fetch data whenever the token changes
 
   // Sort appointments by date in ascending order
-  const sortedAppointments = [...allAppointments].sort((a, b) => {
+  const sortedAppointments = [...appointments].sort((a, b) => {
     const dateA = new Date(a.date);
     const dateB = new Date(b.date);
     return dateA - dateB; // Ascending order
@@ -73,7 +75,7 @@ const AdminDashboard = () => {
 
   // Count new bookings and today's sessions (just for display)
   const newBookings = appointments.filter((appointment) => {
-    const appointmentDate = new Date(appointment.scheduleDate);
+    const appointmentDate = new Date(appointment.date);
     return appointmentDate > new Date();
   }).length;
 
@@ -148,7 +150,7 @@ const AdminDashboard = () => {
           <table>
             <thead>
               <tr>
-                <th>Appoint. Number</th>
+                <th>Appoint. no.</th>
                 <th>Patient</th>
                 <th>Doctor</th>
                 <th>Schedule Date & Time</th>
