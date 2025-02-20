@@ -76,11 +76,9 @@ const PatientHome = () => {
   }, [patient.token, patientId]);
 
   // Filter today's sessions
-  const todaySessions = allAppointments.filter((appointment) => {
+  const todaySessions = appointments.filter((appointment) => {
     const appointmentDate = new Date(appointment.date);
-    return(
-      appointmentDate.toDateString() === new Date().toDateString()
-    )
+    return appointmentDate.toDateString() === new Date().toDateString(); // Compare only dates
   }).length;
 
   return (
@@ -126,7 +124,7 @@ const PatientHome = () => {
             <div className="new_bookings">
               <div className="data">
                 <b>{todaySessions}</b>
-                <b>New Bookings</b>
+                <b>Today's Sessions</b>
               </div>
               <div className="icon">
                 <FaBookmark />
@@ -134,8 +132,8 @@ const PatientHome = () => {
             </div>
             <div className="total_sessions">
               <div className="data">
-                <b>{todaySessions}</b>
-                <b>Today's Sessions</b>
+                <b>{appointments.length}</b>
+                <b>Upcoming Sessions</b>
               </div>
               <div className="icon">
                 <TbActivityHeartbeat />
@@ -147,17 +145,22 @@ const PatientHome = () => {
         {/* Conditional rendering for no appointments */}
         <div className="upcoming_bookings">
           <h3>Your Upcoming Bookings</h3>
-            <table>
-              <thead>
+          <table>
+            <thead>
+              <tr>
+                <th>Appoint. No.</th>
+                <th>Session Title</th>
+                <th>Doctor</th>
+                <th>Schedule Date & Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              {appointments.length === 0 ? (
                 <tr>
-                  <th>Appoint. No.</th>
-                  <th>Session Title</th>
-                  <th>Doctor</th>
-                  <th>Schedule Date & Time</th>
+                  <td colSpan="4">No upcoming appointments</td>
                 </tr>
-              </thead>
-              <tbody>
-                {allAppointments.map((appointment, index) => (
+              ) : (
+                appointments.map((appointment, index) => (
                   <tr key={appointment.id}>
                     <td>{index + 1}</td>
                     <td>{appointment.reason}</td>
@@ -166,10 +169,10 @@ const PatientHome = () => {
                       {new Date(appointment.date).toLocaleDateString()} {appointment.time}
                     </td>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-
+                ))
+              )}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

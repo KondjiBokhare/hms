@@ -39,8 +39,9 @@ const DoctorDashboard = () => {
         setAllAppointments(response.data);
 
         const currentDate = new Date();
+        currentDate.setHours(0, 0, 0, 0);  // Set to midnight to compare only dates without time
 
-        // Filter out appointments that are in the past
+        // Filter out appointments that are in the past, considering today's appointments and future ones
         const upcomingAppointments = response.data.filter((appointment) => {
           const appointmentDate = new Date(appointment.scheduleDate);
           let appointmentTime = appointment.scheduleTime;
@@ -84,11 +85,11 @@ const DoctorDashboard = () => {
 
     
   }, [doctor.token, doctorId]);
+
+  // Count today's sessions for display
   const todaysSessions = allAppointments.filter((appointment) => {
-    const appointmentDate = new Date(appointment.date);
-    return (
-     appointmentDate.toDateString() === new Date().toDateString()
-    );
+    const appointmentDate = new Date(appointment.scheduleDate);
+    return appointmentDate.toDateString() === new Date().toDateString(); // Compare only the date, not time
   }).length;
 
   const routeAppointment = () => {
@@ -168,13 +169,13 @@ const DoctorDashboard = () => {
               </tr>
             </thead>
             <tbody>
-              {allAppointments.map((appointment,index) => (
+              {appointments.map((appointment, index) => (
                 <tr key={appointment._id}>
                   <td>{index + 1}</td>
                   <td>{appointment.reason}</td>
                   <td>{appointment.patientId?.fname} {appointment.patientId?.lname}</td>
                   <td>
-                    {new Date(appointment.date).toLocaleDateString()}{appointment.time}
+                    {new Date(appointment.scheduleDate).toLocaleDateString()} {appointment.scheduleTime}
                   </td>
                 </tr>
               ))}

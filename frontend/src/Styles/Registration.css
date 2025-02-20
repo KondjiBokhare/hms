@@ -107,6 +107,19 @@
     color: #333;
 }
 
+.passfield{
+    display: flex;
+}
+
+.passfield #passfield{
+    width: 100%;
+}
+
+.passfield .eye{
+    margin-top: 10px;
+    margin-left: -25px;
+}
+
 .form_group .input_box input::placeholder {
     color: #333;
 }
