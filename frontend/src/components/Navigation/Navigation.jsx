@@ -2,7 +2,6 @@ import React from "react";
 import './Navigation.css';
 import { Link } from "react-router-dom";
 import { FaHospitalSymbol } from "react-icons/fa";
-import { FaHospitalSymbol } from "react-icons/fa";
 
 
 const Navigation = () => {
