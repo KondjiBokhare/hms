@@ -20,35 +20,24 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
 
     // Validation logic for phone, email, and password
-=======
-  
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
+
     const phonePattern = /^[0-9]{10}$/;
     if (!phonePattern.test(contact)) {
       alert("Please enter a valid 10-digit phone number.");
       return;
     }
-<<<<<<< HEAD
-
-=======
-  
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!emailPattern.test(email)) {
       alert("Please enter a valid email address.");
       return;
-<<<<<<< HEAD
     }
 
     const passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
     if (!passwordPattern.test(password)) {
       alert("Password must be at least 8 characters long, contain uppercase and lowercase letters, a number, and a special character.");
       return;
-=======
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
     }
   
     if (!name || !contact || !email || !specialization || !experience || !password) {
@@ -64,7 +53,6 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
       experience,
       password,
     };
-<<<<<<< HEAD
 
     try {
       const response = await axios.post("http://localhost:8585/api/doctor", doctorData);
@@ -89,10 +77,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
     setExperience("");
     setSpecialization("");
     setPassword("");
-  };
 
-=======
-  
     try {
       const response = await axios.post('http://localhost:8585/api/doctor', doctorData);
       if (response.status === 201) {
@@ -111,8 +96,8 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
     setSpecialization('');
     setPassword('');
   };
-  
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
+
+
   return (
     <div className="add_doctor" ref={popRef} onClick={closePopup}>
       <div className="close_popup">

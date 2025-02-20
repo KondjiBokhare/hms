@@ -147,13 +147,13 @@ const Patients = () => {
               <th>Name</th>
               <th>Contact</th>
               <th>Email</th>
-<<<<<<< HEAD
+
               <th>Gender</th>
               <th>Age</th>
-=======
+
               <th>Age</th>
               <th>Date of Birth</th>
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
+
               <th>Address</th>
               <th>Handle Patient</th>
             </tr>
@@ -164,13 +164,10 @@ const Patients = () => {
                 <td>{patient.fname} {patient.lname}</td>
                 <td>{patient.contact}</td>
                 <td>{patient.email}</td>
-<<<<<<< HEAD
                 <td>{patient.gender}</td>
                 <td>{patient.age}</td>
-=======
                 <td>{patient.age}</td>
                 <td>{new Date(patient.dob).toLocaleDateString()}</td>
->>>>>>> 03f4d9f45d09d0cea8e15a54246124b60f20c290
                 <td>{patient.address}</td>
                 <td>
                   <button type="submit" onClick={() => deletePatient(patient._id)}>

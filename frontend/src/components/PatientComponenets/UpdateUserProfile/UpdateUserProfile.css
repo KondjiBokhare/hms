@@ -32,7 +32,16 @@
     flex-direction: column;
     margin-bottom: 15px;
   }
-  
+
+  .form_group .pass_field{
+    display: flex;
+    align-items: center;
+  }
+  .form_group .pass_field .eye{
+    margin-left: -25px ;
+  }
+
+
   .input_field {
     padding: 12px;
     margin-bottom: 10px;
@@ -41,7 +50,7 @@
     font-size: 16px;
     width: 100%;
   }
-  
+
   .input_field:focus {
     outline: none;
     border-color: #007bff;

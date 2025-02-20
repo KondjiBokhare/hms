@@ -178,48 +178,58 @@ const UpdateUserProfile = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 className="input_field"
               />
-              <input
+              {/* <input
                 type="date"
                 value={dob}  // Make DOB field editable and show date
                 onChange={(e) => setDob(e.target.value)}
                 className="input_field"
-              />
+              /> */}
+              <input
+            type="text"
+            value={dob}
+            onChange={(e) => setDob(e.target.value)}  // User can edit date in dd-mm-yyyy format
+            onBlur={(e) => setDob(formatDateToDDMMYYYY(e.target.value))}  // Format when losing focus
+            className="input_field"
+            placeholder="DD-MM-YYYY"
+          />
             </div>
 
             <div className="form_group">
-              <input
+
+              <div className="pass_field">
+                <input
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter Current Password"
                 value={currentPassword}
                 onChange={(e) => setCurrentPassword(e.target.value)}
                 className="input_field"
               />
-              <div className="password-visibility-toggle" onClick={() => setPasswordVisible(!passwordVisible)} >
-                {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-              </div>
-              
-              <input
+                <div className="password-visibility-toggle eye" onClick={() => setPasswordVisible(!passwordVisible)} >
+                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div></div>
+              <div className="pass_field"> <input
                 type={newPasswordVisible ? "text" : "password"}
                 placeholder="Enter New Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="input_field"
               />
-              <div className="password-visibility-toggle" onClick={() => setNewPasswordVisible(!newPasswordVisible)}>
-                {newPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                <div className="password-visibility-toggle eye" onClick={() => setNewPasswordVisible(!newPasswordVisible)}>
+                  {newPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
-
-              <input
-                type={confirmPasswordVisible ? "text" : "password"}
-                placeholder="Confirm New Password"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="input_field"
-              />
-              <div className="password-visibility-toggle" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
-                {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+              <div className="pass_field">
+                <input
+                  type={confirmPasswordVisible ? "text" : "password"}
+                  placeholder="Confirm New Password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  className="input_field"
+                />
+                <div className="password-visibility-toggle eye" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
+                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
+                </div>
               </div>
-
               <select
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
