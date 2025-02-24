@@ -128,3 +128,18 @@ th {
 tr:hover {
   background-color: #f9f9f9;
 }
+@media (max-width: 768px) {
+  .doctorhome_content {
+    flex-direction: column;
+  }
+  .status,
+  .upcoming_bookings {
+    width: 100%;
+  }
+  .All_Doctors,
+  .all_doctors,
+  .new_bookings,
+  .total_sessions {
+    width: 100%;
+  }
+}

@@ -182,6 +182,8 @@ const My_Appointment = () => {
                         : "Appointed"}
                     </option>
                     <option value="Completed">Completed</option>
+                    <option value="Cancelled">Cancelled</option>
+                    <option value="Not Attempted">Not Attempted</option>
                   </select>
                 </td>
                 <td>

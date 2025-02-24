@@ -27,7 +27,7 @@ const appointmentSchema = new mongoose.Schema({
   status: {
     type: String,
     required: true,
-    enum: ["Appointed", "Ongoing", "Completed", "Cancelled"], // Limit to these values
+    enum: ["Appointed", "Ongoing", "Completed", "Cancelled","Not Attempted"], // Limit to these values
     default: "Appointed",
   },
 });

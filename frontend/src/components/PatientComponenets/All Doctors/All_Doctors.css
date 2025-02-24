@@ -45,3 +45,8 @@ button {
 button:hover {
   background-color: #3077d9;
 }
+@media (max-width: 768px) {
+  .admin_doctors {
+    padding: 10px;
+  }
+}
