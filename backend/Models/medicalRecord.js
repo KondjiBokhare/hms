@@ -11,28 +11,29 @@ const medicalRecordSchema = new mongoose.Schema({
         ref: 'Doctor',
         required: true
     },
-    nurse: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Nurse',
-        required: true
-    },
     date: {
         type: Date,
         required: true,
         default: Date.now
     },
-    symptoms: {
-        type: String,
-        required: true
-    },
-    diagnosis: {
-        type: String,
-        required: true
-    },
-    prescription: {
-        type: String,
-        required: true
-    }
+    prescriptions: [{
+        tabletName: {
+          type: String,
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+        dosage: {
+          type: String,
+          required: true,
+        },
+        time: {
+          type: String,
+          required: true,  // E.g., 'After breakfast', 'Before bed', etc.
+        },
+      }],
 });
 
 const MedicalRecord = mongoose.model('MedicalRecord', medicalRecordSchema);

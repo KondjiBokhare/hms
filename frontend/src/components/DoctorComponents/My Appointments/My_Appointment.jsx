@@ -3,6 +3,7 @@ import "./My_Appointment.css";
 import axios from "axios";
 import Header from "../../Header/Header";
 import PatientsRecords from "../PatientsRecords/PatientsRecords";
+import DoctorPrescription from "../DoctorPrescription/DoctorPrescription";
 
 const My_Appointment = () => {
   const [appointmentsList, setAppointmentsList] = useState([]);
@@ -10,6 +11,7 @@ const My_Appointment = () => {
   const [filterDate, setFilterDate] = useState("");
   const [filterName, setFilterName] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenM, setIsOpenM] = useState(false);
   const [patientId, setPatientId] = useState("");
 
   useEffect(() => {
@@ -59,7 +61,16 @@ const My_Appointment = () => {
     return appointments.sort((a, b) => {
       const dateA = new Date(a.date + " " + a.time);
       const dateB = new Date(b.date + " " + b.time);
-      return dateA - dateB; // Sort ascending by date and time
+
+      // Push "Cancelled" and "Completed" appointments to the bottom
+      if (a.status === "Cancelled" || a.status === "Completed") {
+        return 1; // Push "a" down the list
+      }
+      if (b.status === "Cancelled" || b.status === "Completed") {
+        return -1; // Push "b" down the list
+      }
+
+      return dateA - dateB; // Sort ascending by date and time for others
     });
   };
 
@@ -127,8 +138,8 @@ const My_Appointment = () => {
             />
           </div>
           <button onClick={resetFilters} className="reset-filters-button">
-          Reset Filters
-        </button>
+            Reset Filters
+          </button>
         </div>
 
         {isOpen && (
@@ -141,6 +152,17 @@ const My_Appointment = () => {
             </div>
           </div>
         )}
+        {isOpenM && (
+          <div className="modal-overlay" onClick={() => setIsOpenM(false)}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <DoctorPrescription
+              onClose= {()=>setIsOpenM(false)}
+              patientId = {patientId}
+              />
+            </div>
+          </div>
+        )}
+
 
         {/* Appointments Table */}
         <table>
@@ -153,6 +175,7 @@ const My_Appointment = () => {
               <th>Appointment Status</th>
               <th>Handle Appointment</th>
               <th>View Patient History</th>
+              <th>Prescription</th>
             </tr>
           </thead>
           <tbody>
@@ -174,6 +197,7 @@ const My_Appointment = () => {
                       const newStatus = e.target.value;
                       handleAppointmentStatus(appointment._id, newStatus);
                     }}
+                    disabled={appointment.status === "Cancelled"} // Disable when the status is "Cancelled"
                   >
                     <option value="Appointed">
                       {new Date().toLocaleDateString() ===
@@ -189,11 +213,21 @@ const My_Appointment = () => {
                 <td>
                   <button
                     onClick={() => {
-                      setPatientId(appointment.patientId._id); // Set the patient ID for the modal
+                      setPatientId(appointment.patientId._id);
                       setIsOpen(true);
                     }}
                   >
                     View History
+                  </button>
+                </td>
+                <td>
+                  <button
+                    onClick={() => {
+                      setPatientId(appointment.patientId._id);
+                      setIsOpenM(true);
+                    }}
+                  >
+                    Prescription
                   </button>
                 </td>
               </tr>

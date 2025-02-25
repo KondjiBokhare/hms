@@ -55,7 +55,6 @@ const Doctor = () => {
             <Link to="/doctor"><AiFillHome/> Dashboard</Link>
             <Link to="myAppointments"><FaUserDoctor/> My Appointments</Link>
             <Link to="myPatients"><LuBookImage/> My Patients</Link>
-            {/* <Link to="mySessions"><FaCalendarDays/> My Sessions</Link> */}
         </div>
       </div>
       <div className="doctorContent">

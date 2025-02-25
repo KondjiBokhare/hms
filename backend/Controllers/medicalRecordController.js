@@ -1,96 +1,118 @@
 const MedicalRecord = require('../Models/medicalRecord');
+const Patient = require('../Models/patient'); 
+const Doctor = require('../Models/doctor'); 
 
-// Create a new medical record
+// Controller to create a medical record with prescriptions
 const createMedicalRecord = async (req, res) => {
-    const { patientId, doctorId, nurseId, date, symptoms, diagnosis, prescription } = req.body;
+  try {
+    const { patient, doctor, prescriptions } = req.body;
 
-    try {
-        const medicalRecord = new MedicalRecord({
-            patient: patientId,
-            doctor: doctorId,
-            nurse: nurseId,
-            date,
-            symptoms,
-            diagnosis,
-            prescription
-        });
-        await medicalRecord.save();
-        res.status(201).json(medicalRecord);
+    // Validate incoming data
+    if (!patient || !doctor || !Array.isArray(prescriptions)) {
+      return res.status(400).json({ message: 'Invalid input. Ensure patientId, doctorId, and prescriptions are provided.' });
     }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
 
-// Get all medical records
+    // Optional: Check if patient and doctor exist in the database
+    const patientt = await Patient.findById(patient);
+    const doctorr = await Doctor.findById(doctor);
+
+    if (!patientt) {
+      return res.status(404).json({ message: 'Patient not found.' });
+    }
+
+    if (!doctorr) {
+      return res.status(404).json({ message: 'Doctor not found.' });
+    }
+
+    // Create the medical record with the provided data
+    const newMedicalRecord = new MedicalRecord({
+      patient: patientt,
+      doctor: doctorr,
+      prescriptions: prescriptions, // Directly embedding prescriptions in the record
+    });
+
+    // Save the new medical record to the database
+    await newMedicalRecord.save();
+
+    // Send a success response
+    return res.status(201).json({
+      message: 'Medical record created successfully',
+      medicalRecord: newMedicalRecord,
+    });
+
+  } catch (error) {
+    // Log the error for debugging
+    console.error('Error creating medical record:', error);
+
+    // Send a 500 error response with a generic message
+    return res.status(500).json({
+      message: 'Error creating medical record',
+      error: error.message,
+    });
+  }
+};
+
+// Controller to get all medical records
 const getMedicalRecords = async (req, res) => {
-    try {
-        const medicalRecords = await MedicalRecord.find();
-        res.json(medicalRecords);
+  try {
+    // Fetch all medical records from the database, populating the patient and doctor references
+    const medicalRecords = await MedicalRecord.find()
+      .populate('patient', 'fname lname age')  // Replace with patient details as needed
+      .populate('doctor', 'name specialization');  // Replace with doctor details as needed
+
+    // Send response back to the client
+    return res.status(200).json({
+      message: 'Medical records fetched successfully',
+      medicalRecords,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching medical records', error });
+  }
+};
+
+// Controller to get medical records by Patient's ID
+const getMedicalRecordsByPatientsId = async (req, res) => {
+  try {
+    const { patientId } = req.params;  // Use patientId from the URL params
+    
+    // Fetch medical records for the given patient
+    const medicalRecords = await MedicalRecord.find({ patient: patientId })
+      .populate('doctor', 'name specialization');  // Optionally populate doctor info
+    
+    if (!medicalRecords.length) {
+      return res.status(404).json({ message: 'No medical records found for this patient.' });
     }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+
+    return res.status(200).json({ message: 'Patient medical records fetched successfully', medicalRecords });
+
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching medical records', error });
+  }
 }
 
-// Get a medical record by ID
-const getMedicalRecordById = async (req, res) => {
-    try {
-        const medicalRecord = await MedicalRecord.findById(req.params.id);
-        if (!medicalRecord) {
-            return res.status(404).json({ message: "Medical record not found" });
-        }
-        res.json(medicalRecord);
+// Controller to get medical records by Doctor's ID
+const getMedicalRecordsByDoctorsId = async (req, res) => {
+  try {
+    const { doctorId } = req.params;  // Use doctorId from the URL params
+    
+    // Fetch medical records for the given doctor
+    const medicalRecords = await MedicalRecord.find({ doctor: doctorId })
+      .populate('patient', 'fname lname age');  // Optionally populate patient info
+    
+    if (!medicalRecords.length) {
+      return res.status(404).json({ message: 'No medical records found for this doctor.' });
     }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
 
-// Update a medical record by ID
-const updateMedicalRecord = async (req, res) => {
-    const { patientId, doctorId, nurseId, date, symptoms, diagnosis, prescription } = req.body;
+    return res.status(200).json({ message: 'Doctor medical records fetched successfully', medicalRecords });
 
-    try {
-        const medicalRecord = await MedicalRecord.findById(req.params.id);
-        if (!medicalRecord) {
-            return res.status(404).json({ message: "Medical record not found" });
-        }
-        medicalRecord.patient = patientId;
-        medicalRecord.doctor = doctorId;
-        medicalRecord.nurse = nurseId;
-        medicalRecord.date = date;
-        medicalRecord.symptoms = symptoms;
-        medicalRecord.diagnosis = diagnosis;
-        medicalRecord.prescription = prescription;
-        await medicalRecord.save();
-        res.json(medicalRecord);
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-}
-
-// Delete a medical record by ID
-
-const deleteMedicalRecord = async (req, res) => {
-    try {
-        const medicalRecord = await MedicalRecord.findById(req.params.id);
-        if (!medicalRecord) {
-            return res.status(404).json({ message: "Medical record not found" });
-        }
-        await medicalRecord.remove();
-        res.json({ message: "Medical record deleted" });
-    }
-    catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+  } catch (error) {
+    return res.status(500).json({ message: 'Error fetching medical records', error });
+  }
 }
 
 module.exports = {
-    createMedicalRecord,
-    getMedicalRecords,
-    getMedicalRecordById,
-    updateMedicalRecord,
-    deleteMedicalRecord
+  createMedicalRecord,
+  getMedicalRecords,
+  getMedicalRecordsByPatientsId,
+  getMedicalRecordsByDoctorsId
 };

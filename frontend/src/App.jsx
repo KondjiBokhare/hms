@@ -77,6 +77,7 @@ const App = () => {
             <Route path="myAppointments" element={<My_Appointment />} />
             <Route path="mySessions" element={<My_Sessions />} />
             <Route path="myPatients" element={<My_Patients />} />
+
           </Route>
 
           {/* Admin Routes */}
