@@ -63,15 +63,15 @@ const MakeAppointment = ({ onClose, doctorName, doctorId }) => {
         <IoCloseCircleOutline onClick={onClose} />
       </div>
       <form onSubmit={handleSubmit}>
-        <div className="input_field">
+        <div className="input_field1">
           <label>Doctor Name</label>
           <input type="text" value={doctorName} readOnly />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label>Patient Name</label>
           <input type="text" value={patientName} readOnly />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label>Date:</label>
           <input
             type="date"
@@ -81,7 +81,7 @@ const MakeAppointment = ({ onClose, doctorName, doctorId }) => {
             required
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label>Time:(make sure choose time between morning 9 to evening 9)</label>
           <input
             type="time"
@@ -92,7 +92,7 @@ const MakeAppointment = ({ onClose, doctorName, doctorId }) => {
             required
           />
           </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label>Reason:</label>
           <input
             type="text"
@@ -104,7 +104,7 @@ const MakeAppointment = ({ onClose, doctorName, doctorId }) => {
         {showErrorPopup && (
           <div className="error-popup">{errorMessage}</div>
         )}
-        <div className="input_field">
+        <div className="input_field1">
           <button type="submit">Make Appointment</button>
         </div>
       </form>

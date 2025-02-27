@@ -53,11 +53,11 @@
     justify-content: end;
     font-size: 20px;
   }
-  .input_field {
+  .input_field1 {
     margin-bottom: 15px;
   }
   
-  .input_field label {
+  .input_field1 label {
     font-size: 14px;
     font-weight: bold;
     color: #333;
@@ -65,8 +65,8 @@
     margin-bottom: 5px;
   }
   
-  .input_field input,
-  .input_field select {
+  .input_field1 input,
+  .input_field1 select {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -76,12 +76,12 @@
     transition: border-color 0.3s ease;
   }
   
-  .input_field input:focus,
-  .input_field select:focus {
+  .input_field1 input:focus,
+  .input_field1 select:focus {
     border-color: #3a8dff;
   }
   
-  .input_field select {
+  .input_field1 select {
     padding: 10px;
   }
   

@@ -104,7 +104,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
         <IoCloseCircleOutline onClick={onClose} />
       </div>
       <form action="" method="post" onSubmit={handleSubmit} className="doctor_form">
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="name">Name</label>
           <input
             type="text"
@@ -114,7 +114,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="contact">Contact</label>
           <input
             type="number"
@@ -127,7 +127,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             onChange={(e) => setContact(e.target.value)}
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="specialization">Specialization</label>
           <select
             name="specialization"
@@ -143,7 +143,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             <option value="Cosmetologist">Cosmetologist</option>
           </select>
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="experience">Experience</label>
           <input
             type="number"
@@ -154,7 +154,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             onChange={(e) => setExperience(e.target.value)}
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="email">Email</label>
           <input
             type="email"
@@ -165,7 +165,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <label htmlFor="password">Password</label>
           <input
             type="password"
@@ -176,7 +176,7 @@ const AddDoctor = ({ onClose, onAddDoctor }) => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="input_field">
+        <div className="input_field1">
           <button type="submit">ADD DOCTOR</button>
         </div>
       </form>
