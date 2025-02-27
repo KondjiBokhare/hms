@@ -135,4 +135,52 @@ const Registration = async(req,res)=>{
 }
 }
 
-module.exports = { login , Registration};
+const changePassword = async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const token = req.headers['authorization']?.split(' ')[1]; // Get the token from the Authorization header
+
+    if (!token) {
+      return res.status(401).send('No token provided');
+    }
+
+    // Verify the token and get user ID
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userId = decoded.id;
+
+    // Check the role of the user (Patient, Doctor, Admin)
+    const patient = await Patient.findById(userId);
+    const doctor = await Doctor.findById(userId);
+    const admin = await Admin.findById(userId);
+
+    let user;
+    if (patient) user = patient;
+    else if (doctor) user = doctor;
+    else if (admin) user = admin;
+
+    if (!user) {
+      return res.status(404).send('User not found');
+    }
+
+    // Compare the current password with the stored password
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).send('Current password is incorrect');
+    }
+
+    // Hash the new password
+    const hashedNewPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update the password in the database
+    user.password = hashedNewPassword;
+    await user.save();
+
+    res.status(200).send('Password changed successfully');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error occurred during password change');
+  }
+};
+
+
+module.exports = { login , Registration, changePassword};

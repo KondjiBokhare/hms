@@ -156,8 +156,8 @@ const My_Appointment = () => {
           <div className="modal-overlay" onClick={() => setIsOpenM(false)}>
             <div className="modal-content" onClick={(e) => e.stopPropagation()}>
               <DoctorPrescription
-              onClose= {()=>setIsOpenM(false)}
-              patientId = {patientId}
+                onClose={() => setIsOpenM(false)}
+                patientId={patientId}
               />
             </div>
           </div>
@@ -201,7 +201,7 @@ const My_Appointment = () => {
                   >
                     <option value="Appointed">
                       {new Date().toLocaleDateString() ===
-                      new Date(appointment.date).toLocaleDateString()
+                        new Date(appointment.date).toLocaleDateString()
                         ? "Ongoing"
                         : "Appointed"}
                     </option>
@@ -226,6 +226,7 @@ const My_Appointment = () => {
                       setPatientId(appointment.patientId._id);
                       setIsOpenM(true);
                     }}
+                    disabled={appointment.status === "Cancelled" || appointment.status === "Completed"} // Disable button when status is "Cancelled" or "Completed"
                   >
                     Prescription
                   </button>

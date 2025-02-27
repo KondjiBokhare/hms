@@ -10,17 +10,58 @@ const UpdateUserProfile = () => {
   const [address, setAddress] = useState("");
   const [email, setEmail] = useState("");
   const [contact, setContact] = useState("");
-  const [dob, setDob] = useState("");  // Date of birth to be editable
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");  // For password confirmation
-  const [currentPassword, setCurrentPassword] = useState("");  // For current password check
+  const [dob, setDob] = useState(""); // Date of birth to be editable
   const [gender, setGender] = useState("");
   const [message, setMessage] = useState(""); // State for error/success messages
-  const [loading, setLoading] = useState(true); // Loading state
-  const [passwordVisible, setPasswordVisible] = useState(false); // To toggle current password visibility
-  const [newPasswordVisible, setNewPasswordVisible] = useState(false); // To toggle new password visibility
-  const [confirmPasswordVisible, setConfirmPasswordVisible] = useState(false); // To toggle confirm password visibility
+  const [loading, setLoading] = useState(true); // Loading state 
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [passwordTypeCurrent, setPasswordTypeCurrent] = useState("password");
+  const [passwordTypeNew, setPasswordTypeNew] = useState("password");
+  const [passwordTypeConfirm, setPasswordTypeConfirm] = useState("password");
+  const [iconCurrent, setIconCurrent] = useState(<FaEyeSlash />);
+  const [iconNew, setIconNew] = useState(<FaEyeSlash />);
+  const [iconConfirm, setIconConfirm] = useState(<FaEyeSlash />);
   const navigate = useNavigate();
+
+  const handleChangePassword = async (e) => {
+    e.preventDefault();
+
+    if (newPassword !== confirmPassword) {
+      alert("New passwords do not match!");
+      return;
+    }
+
+    try {
+      const authToken = window.localStorage.getItem("authToken");
+      if (!authToken) {
+        alert("You are not logged in!");
+        return;
+      }
+
+      const response = await axios.post(
+        "http://localhost:8585/api/changePassword",
+        { currentPassword, newPassword },
+        { headers: { Authorization: `Bearer ${authToken}` } }
+      );
+
+      if (response.status === 200) {
+        alert("Password changed successfully!");
+        navigate("/login"); // Redirect to login page after password change
+      } else {
+        alert("Failed to change password!");
+      }
+    } catch (error) {
+      console.log(error);
+      alert("An error occurred. Please try again.");
+    } finally {
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    }
+  };
+
   const patientId = window.localStorage.getItem("patientID");
 
   // Convert DOB to dd-mm-yyyy format
@@ -36,14 +77,16 @@ const UpdateUserProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:8585/api/patients/${patientId}`); // Fetch user data
+        const response = await axios.get(
+          `http://localhost:8585/api/patients/${patientId}`
+        ); // Fetch user data
         const { fname, lname, address, email, contact, dob, gender } = response.data;
         setFname(fname);
         setLname(lname);
         setEmail(email);
         setContact(contact);
         setAddress(address);
-        setDob(formatDate(dob));  // Format date
+        setDob(formatDate(dob)); // Format date
         setGender(gender);
       } catch (error) {
         setMessage("Error fetching user data");
@@ -55,73 +98,21 @@ const UpdateUserProfile = () => {
     fetchUserData();
   }, [patientId]);
 
-  // Email validation regex
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  // Password validation regex
-  const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$/;
-  // Contact number validation
-  const contactRegex = /^\d{10}$/;
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    // Validate fields
-    if (!fname || !lname || !address || !email || !contact || !dob || !password || !gender) {
-      setMessage("All fields are required.");
-      return;
-    }
-
-    if (!emailRegex.test(email)) {
-      setMessage("Please enter a valid email.");
-      return;
-    }
-
-    if (!contactRegex.test(contact)) {
-      setMessage("Please enter a valid contact number.");
-      return;
-    }
-
-    if (!passwordRegex.test(password)) {
-      setMessage("Password must be at least 6 characters, including one uppercase letter and one number.");
-      return;
-    }
-
-    // If password is changing, check if the current password is entered and matches with the stored password
-    if (currentPassword && currentPassword !== password) {
-      setMessage("Current password does not match the entered password.");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      setMessage("Passwords do not match.");
-      return;
-    }
-
-    const today = new Date();
-    const birthDate = new Date(dob.split("-").reverse().join("-")); // Convert dd-mm-yyyy format to date object
-    const age = today.getFullYear() - birthDate.getFullYear();
-    const month = today.getMonth() - birthDate.getMonth();
-    if (age < 18 || (age === 18 && month < 0)) {
-      setMessage("You must be at least 18 years old.");
-      return;
-    }
-
-    try {
-      const patientData = { fname, lname, address, email, contact, dob, password, gender };
-      const response = await axios.put("http://localhost:8585/api/updateProfile", patientData);
-
-      if (response.status === 200) {
-        setMessage("Profile updated successfully!");
-        setTimeout(() => {
-          navigate("/patient"); // Navigate after a successful update
-        }, 2000);
-      }
-    } catch (error) {
-      setMessage(error.response ? error.response.data : "An error occurred.");
-    }
+  // Password visibility toggle function
+  const toggleVisibilityCurrent = () => {
+    setPasswordTypeCurrent(passwordTypeCurrent === "password" ? "text" : "password");
+    setIconCurrent(passwordTypeCurrent === "password" ? <FaEye /> : <FaEyeSlash />);
   };
-  console.log(dob);
+
+  const toggleVisibilityNew = () => {
+    setPasswordTypeNew(passwordTypeNew === "password" ? "text" : "password");
+    setIconNew(passwordTypeNew === "password" ? <FaEye /> : <FaEyeSlash />);
+  };
+
+  const toggleVisibilityConfirm = () => {
+    setPasswordTypeConfirm(passwordTypeConfirm === "password" ? "text" : "password");
+    setIconConfirm(passwordTypeConfirm === "password" ? <FaEye /> : <FaEyeSlash />);
+  };
 
   return (
     <div className="update_profile_container">
@@ -129,7 +120,7 @@ const UpdateUserProfile = () => {
         {loading ? (
           <div className="loader">Loading...</div> // Loading spinner or message
         ) : (
-          <form onSubmit={handleSubmit} className="update_profile_form">
+          <form onSubmit={handleChangePassword} className="update_profile_form">
             <div className="form_header">
               <h2>Update Your Profile</h2>
               <p>Update your personal details below</p>
@@ -178,75 +169,77 @@ const UpdateUserProfile = () => {
                 onChange={(e) => setAddress(e.target.value)}
                 className="input_field"
               />
-              {/* <input
-                type="date"
-                value={dob}  // Make DOB field editable and show date
+              <input
+                type="text"
+                value={dob}
                 onChange={(e) => setDob(e.target.value)}
                 className="input_field"
-              /> */}
-              <input
-            type="text"
-            value={dob}
-            onChange={(e) => setDob(e.target.value)}  // User can edit date in dd-mm-yyyy format
-            onBlur={(e) => setDob(formatDateToDDMMYYYY(e.target.value))}  // Format when losing focus
-            className="input_field"
-            placeholder="DD-MM-YYYY"
-          />
+                placeholder="DD-MM-YYYY"
+              />
             </div>
 
-            <div className="form_group">
-
-              <div className="pass_field">
+            {/* Password fields */}
+            <div className="password_field_group">
+              <div className="password_field">
                 <input
-                type={passwordVisible ? "text" : "password"}
-                placeholder="Enter Current Password"
-                value={currentPassword}
-                onChange={(e) => setCurrentPassword(e.target.value)}
-                className="input_field"
-              />
-                <div className="password-visibility-toggle eye" onClick={() => setPasswordVisible(!passwordVisible)} >
-                  {passwordVisible ? <FaEyeSlash /> : <FaEye />}
-                </div></div>
-              <div className="pass_field"> <input
-                type={newPasswordVisible ? "text" : "password"}
-                placeholder="Enter New Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="input_field"
-              />
-                <div className="password-visibility-toggle eye" onClick={() => setNewPasswordVisible(!newPasswordVisible)}>
-                  {newPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-                </div>
+                  type={passwordTypeCurrent}
+                  placeholder="Current Password"
+                  value={currentPassword}
+                  onChange={(e) => setCurrentPassword(e.target.value)}
+                  className="input_field"
+                />
+                <span className="eye_icon" onClick={toggleVisibilityCurrent}>
+                  {iconCurrent}
+                </span>
               </div>
-              <div className="pass_field">
+
+              <div className="password_field">
                 <input
-                  type={confirmPasswordVisible ? "text" : "password"}
+                  type={passwordTypeNew}
+                  placeholder="New Password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="input_field"
+                />
+                <span className="eye_icon" onClick={toggleVisibilityNew}>
+                  {iconNew}
+                </span>
+              </div>
+
+              <div className="password_field">
+                <input
+                  type={passwordTypeConfirm}
                   placeholder="Confirm New Password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="input_field"
                 />
-                <div className="password-visibility-toggle eye" onClick={() => setConfirmPasswordVisible(!confirmPasswordVisible)}>
-                  {confirmPasswordVisible ? <FaEyeSlash /> : <FaEye />}
-                </div>
+                <span className="eye_icon" onClick={toggleVisibilityConfirm}>
+                  {iconConfirm}
+                </span>
               </div>
               <select
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-                className="input_field"
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+              className="input_field"
+            >
+              <option value="">Select Gender</option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
             </div>
+
+            {/* Gender selection */}
+            
 
             {/* Error Message */}
             {message && <div className="error_message">{message}</div>}
 
             <div className="form_actions">
-              <button type="submit" className="update_btn">Update Profile</button>
+              <button type="submit" className="update_btn">
+                Update Profile
+              </button>
             </div>
           </form>
         )}
@@ -256,3 +249,42 @@ const UpdateUserProfile = () => {
 };
 
 export default UpdateUserProfile;
+
+  
+
+
+
+//   return (
+//     <div className="registration_session">
+//       <div className="form_content">
+//         <div className="left_image">
+//           <img src="https://i.postimg.cc/bJyPhbhB/two.jpg" alt="" />
+//         </div>
+//         <form onSubmit={handleChangePassword} className="registration_form">
+//           <div className="reg_heading">
+//             <h2>Change Password</h2>
+//             <p>Enter your current password and a new one to update.</p>
+//           </div>
+
+          
+//           <div className="form_group">
+//             <div className="input_box">
+//               <button type="submit" className="reg_btn">
+//                 Change Password
+//               </button>
+//             </div>
+//           </div>
+
+//           <div className="login_page">
+//             <p>
+//               Remember your password? <a href="/login">Login</a>
+//             </p>
+//           </div>
+//         </form>
+//       </div>
+//     </div>
+//   );
+// };
+
+// export default UpdateUserProfile;
+
