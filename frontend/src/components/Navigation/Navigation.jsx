@@ -9,7 +9,7 @@ const Navigation = () => {
     <div className="navigation_section">
       <Link to="/" className="logo">       
         <div className="icon"><FaHospitalSymbol /></div>
-        <div className="hospital_name">MIT Hospital</div>
+        <div className="hospital_name">HumanCare Hospital</div>
       </Link>
       <div className="nav_links">
         <Link to="/registration" className="reg">

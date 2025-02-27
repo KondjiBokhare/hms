@@ -64,7 +64,7 @@ const PatientsRecords = ({ onClose, patientId }) => {
                   <td>{new Date(data.date).toLocaleDateString()}</td>
                   <td>{data.reason}</td>
                   <td>
-                    {/* {patientHistoryData.length >= 0 ? (
+                    {patientHistoryData.length >= 0 ? (
                       
                       patientHistoryData.map((history) => (
                         <div key={history._id}>
@@ -82,8 +82,8 @@ const PatientsRecords = ({ onClose, patientId }) => {
                       ))
                     ) : (
                       <p>No prescription data found.</p>
-                    )} */}
-                    {
+                    )}
+                    {/* {
                      patientHistoryData.map((history) => (
                           <div key={history._id}>
                             {history.prescriptions.map((prescription, index) => (
@@ -94,7 +94,7 @@ const PatientsRecords = ({ onClose, patientId }) => {
                           </div>
                         ))
                      
-                    }
+                    } */}
                   </td>
                 </tr>
               ))
